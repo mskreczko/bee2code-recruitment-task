@@ -3,7 +3,7 @@ package pl.mskreczko.medresearch.domain.researchproject;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
+import org.hibernate.annotations.Cascade;
 import pl.mskreczko.medresearch.domain.consent.Consent;
 
 import java.time.LocalDate;
@@ -13,7 +13,6 @@ import java.util.UUID;
 
 @Getter
 @Setter
-@ToString
 @Entity
 @Table(name = "research_projects")
 public class ResearchProject {
@@ -28,6 +27,7 @@ public class ResearchProject {
 
     private LocalDate dateOfCreation;
 
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     @OneToMany(mappedBy = "project")
     private Set<Consent> consents;
 
@@ -42,5 +42,15 @@ public class ResearchProject {
     @Override
     public int hashCode() {
         return Objects.hash(id, name, description);
+    }
+
+    @Override
+    public String toString() {
+        return "ResearchProject{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", dateOfCreation=" + dateOfCreation +
+                '}';
     }
 }

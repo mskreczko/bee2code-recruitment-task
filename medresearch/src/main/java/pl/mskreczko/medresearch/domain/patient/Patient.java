@@ -3,8 +3,8 @@ package pl.mskreczko.medresearch.domain.patient;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 import org.hibernate.Hibernate;
+import org.hibernate.annotations.Cascade;
 import pl.mskreczko.medresearch.domain.consent.Consent;
 
 import java.util.Objects;
@@ -13,7 +13,6 @@ import java.util.UUID;
 
 @Getter
 @Setter
-@ToString
 @Entity
 @Table(name = "patients")
 public class Patient {
@@ -28,6 +27,7 @@ public class Patient {
 
     private String phoneNumber;
 
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     @OneToMany(mappedBy = "patient")
     private Set<Consent> consents;
 
@@ -42,5 +42,15 @@ public class Patient {
     @Override
     public int hashCode() {
         return getClass().hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return "Patient{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                '}';
     }
 }
