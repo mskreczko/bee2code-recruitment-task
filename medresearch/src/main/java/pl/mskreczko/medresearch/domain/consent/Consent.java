@@ -1,5 +1,6 @@
 package pl.mskreczko.medresearch.domain.consent;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,9 +21,20 @@ public class Consent {
 
     @ManyToOne
     @JoinColumn(name = "patient_id")
+    @JsonIgnore
     private Patient patient;
 
     @ManyToOne
     @JoinColumn(name = "project_id")
+    @JsonIgnore
     private ResearchProject project;
+
+    @Override
+    public String toString() {
+        return "Consent{" +
+                "id=" + id +
+                ", patient=" + patient +
+                ", project=" + project +
+                '}';
+    }
 }
