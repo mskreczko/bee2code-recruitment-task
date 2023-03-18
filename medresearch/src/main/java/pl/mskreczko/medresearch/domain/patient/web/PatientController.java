@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import pl.mskreczko.medresearch.domain.patient.dto.PatientCreationDto;
 import pl.mskreczko.medresearch.domain.patient.dto.PatientDetailsDto;
 import pl.mskreczko.medresearch.domain.patient.service.PatientService;
+import pl.mskreczko.medresearch.exceptions.EntityAlreadyExistsException;
 import pl.mskreczko.medresearch.exceptions.NoSuchEntityException;
-import pl.mskreczko.medresearch.exceptions.PatientAlreadyExistsException;
 
 import java.util.UUID;
 
@@ -38,7 +38,7 @@ public class PatientController {
         try {
             patientService.createPatient(patientCreationDto);
             return new ResponseEntity<>(HttpStatusCode.valueOf(201));
-        } catch (PatientAlreadyExistsException exception) {
+        } catch (EntityAlreadyExistsException exception) {
             return new ResponseEntity<>(HttpStatusCode.valueOf(409));
         }
     }

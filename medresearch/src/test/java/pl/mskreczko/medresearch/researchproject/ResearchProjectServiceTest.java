@@ -11,8 +11,8 @@ import pl.mskreczko.medresearch.domain.researchproject.ResearchProject;
 import pl.mskreczko.medresearch.domain.researchproject.ResearchProjectRepository;
 import pl.mskreczko.medresearch.domain.researchproject.dto.ProjectCreationDto;
 import pl.mskreczko.medresearch.domain.researchproject.service.ResearchProjectService;
+import pl.mskreczko.medresearch.exceptions.EntityAlreadyExistsException;
 import pl.mskreczko.medresearch.exceptions.NoSuchEntityException;
-import pl.mskreczko.medresearch.exceptions.ProjectAlreadyExistsException;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -52,7 +52,7 @@ public class ResearchProjectServiceTest {
     void createNewProject_throwsException() {
         Mockito.when(researchProjectRepository.findByName("sample project")).thenReturn(Optional.of(new ResearchProject()));
 
-        Assertions.assertThrows(ProjectAlreadyExistsException.class, () ->
+        Assertions.assertThrows(EntityAlreadyExistsException.class, () ->
                 researchProjectService.createNewProject(
                         new ProjectCreationDto("sample project", "test")));
     }

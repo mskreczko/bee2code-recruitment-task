@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import pl.mskreczko.medresearch.domain.researchproject.dto.ProjectCreationDto;
 import pl.mskreczko.medresearch.domain.researchproject.dto.ProjectDetailsDto;
 import pl.mskreczko.medresearch.domain.researchproject.service.ResearchProjectService;
+import pl.mskreczko.medresearch.exceptions.EntityAlreadyExistsException;
 import pl.mskreczko.medresearch.exceptions.NoSuchEntityException;
-import pl.mskreczko.medresearch.exceptions.ProjectAlreadyExistsException;
 
 import java.util.UUID;
 
@@ -38,7 +38,7 @@ public class ResearchProjectController {
         try {
             researchProjectService.createNewProject(projectCreationDto);
             return new ResponseEntity<>(HttpStatusCode.valueOf(201));
-        } catch (ProjectAlreadyExistsException exception) {
+        } catch (EntityAlreadyExistsException exception) {
             return new ResponseEntity<>(HttpStatusCode.valueOf(409));
         }
     }

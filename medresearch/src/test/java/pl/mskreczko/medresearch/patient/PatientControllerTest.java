@@ -13,8 +13,8 @@ import pl.mskreczko.medresearch.domain.patient.dto.PatientCreationDto;
 import pl.mskreczko.medresearch.domain.patient.dto.PatientDetailsDto;
 import pl.mskreczko.medresearch.domain.patient.service.PatientService;
 import pl.mskreczko.medresearch.domain.patient.web.PatientController;
+import pl.mskreczko.medresearch.exceptions.EntityAlreadyExistsException;
 import pl.mskreczko.medresearch.exceptions.NoSuchEntityException;
-import pl.mskreczko.medresearch.exceptions.PatientAlreadyExistsException;
 
 import java.util.UUID;
 
@@ -70,7 +70,7 @@ public class PatientControllerTest {
 
     @Test
     void createNewPatient_returnsConflict() throws Exception {
-        Mockito.doThrow(PatientAlreadyExistsException.class).when(patientService).createPatient(
+        Mockito.doThrow(EntityAlreadyExistsException.class).when(patientService).createPatient(
                 new PatientCreationDto("John Doe", "test@test.com", "123456789")
         );
 
