@@ -37,6 +37,7 @@ Usunięcie projektu:
 
 Dodanie zgody: 
 ```curl -X POST http://localhost:8080/api/v1/consents?patient_id=:patient&project_id=:project```
+
 Usunięcie zgody: 
 ```curl -X DELETE http://localhost:8080/api/v1/consents/:id```
 
