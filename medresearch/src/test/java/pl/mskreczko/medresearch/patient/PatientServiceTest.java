@@ -11,8 +11,8 @@ import pl.mskreczko.medresearch.domain.patient.Patient;
 import pl.mskreczko.medresearch.domain.patient.PatientRepository;
 import pl.mskreczko.medresearch.domain.patient.dto.PatientCreationDto;
 import pl.mskreczko.medresearch.domain.patient.service.PatientService;
+import pl.mskreczko.medresearch.exceptions.EntityAlreadyExistsException;
 import pl.mskreczko.medresearch.exceptions.NoSuchEntityException;
-import pl.mskreczko.medresearch.exceptions.PatientAlreadyExistsException;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -51,7 +51,7 @@ public class PatientServiceTest {
     void createPatient_throwsException() {
         Mockito.when(patientRepository.findByEmail("test@test.com")).thenReturn(Optional.of(new Patient()));
 
-        Assertions.assertThrows(PatientAlreadyExistsException.class, () ->
+        Assertions.assertThrows(EntityAlreadyExistsException.class, () ->
                 patientService.createPatient(
                         new PatientCreationDto("John Doe", "test@test.com", "123456789")));
     }

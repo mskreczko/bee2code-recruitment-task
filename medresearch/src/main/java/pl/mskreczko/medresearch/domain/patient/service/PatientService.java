@@ -7,8 +7,8 @@ import pl.mskreczko.medresearch.domain.patient.Patient;
 import pl.mskreczko.medresearch.domain.patient.PatientRepository;
 import pl.mskreczko.medresearch.domain.patient.dto.PatientCreationDto;
 import pl.mskreczko.medresearch.domain.patient.dto.PatientDetailsDto;
+import pl.mskreczko.medresearch.exceptions.EntityAlreadyExistsException;
 import pl.mskreczko.medresearch.exceptions.NoSuchEntityException;
-import pl.mskreczko.medresearch.exceptions.PatientAlreadyExistsException;
 
 import java.util.List;
 import java.util.UUID;
@@ -27,9 +27,9 @@ public class PatientService {
         return patientRepository.findById(id).orElseThrow(NoSuchEntityException::new);
     }
 
-    public void createPatient(PatientCreationDto patientCreationDto) throws PatientAlreadyExistsException {
+    public void createPatient(PatientCreationDto patientCreationDto) throws EntityAlreadyExistsException {
         patientRepository.findByEmail(patientCreationDto.email()).ifPresent((patient) -> {
-            throw new PatientAlreadyExistsException();
+            throw new EntityAlreadyExistsException("Patient with given email already exists");
         });
         var patient = new Patient();
 

@@ -13,8 +13,8 @@ import pl.mskreczko.medresearch.domain.researchproject.dto.ProjectCreationDto;
 import pl.mskreczko.medresearch.domain.researchproject.dto.ProjectDetailsDto;
 import pl.mskreczko.medresearch.domain.researchproject.service.ResearchProjectService;
 import pl.mskreczko.medresearch.domain.researchproject.web.ResearchProjectController;
+import pl.mskreczko.medresearch.exceptions.EntityAlreadyExistsException;
 import pl.mskreczko.medresearch.exceptions.NoSuchEntityException;
-import pl.mskreczko.medresearch.exceptions.ProjectAlreadyExistsException;
 
 import java.util.UUID;
 
@@ -69,7 +69,7 @@ public class ResearchProjectControllerTest {
 
     @Test
     void createNewProject_returnsConflict() throws Exception {
-        Mockito.doThrow(ProjectAlreadyExistsException.class).when(researchProjectService).createNewProject(
+        Mockito.doThrow(EntityAlreadyExistsException.class).when(researchProjectService).createNewProject(
                 new ProjectCreationDto("sample project", "test")
         );
 

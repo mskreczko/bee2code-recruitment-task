@@ -7,8 +7,8 @@ import pl.mskreczko.medresearch.domain.researchproject.ResearchProject;
 import pl.mskreczko.medresearch.domain.researchproject.ResearchProjectRepository;
 import pl.mskreczko.medresearch.domain.researchproject.dto.ProjectCreationDto;
 import pl.mskreczko.medresearch.domain.researchproject.dto.ProjectDetailsDto;
+import pl.mskreczko.medresearch.exceptions.EntityAlreadyExistsException;
 import pl.mskreczko.medresearch.exceptions.NoSuchEntityException;
-import pl.mskreczko.medresearch.exceptions.ProjectAlreadyExistsException;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -28,9 +28,9 @@ public class ResearchProjectService {
         return researchProjectRepository.findById(id).orElseThrow(NoSuchEntityException::new);
     }
 
-    public void createNewProject(ProjectCreationDto projectCreationDto) throws ProjectAlreadyExistsException {
+    public void createNewProject(ProjectCreationDto projectCreationDto) throws EntityAlreadyExistsException {
         researchProjectRepository.findByName(projectCreationDto.name()).ifPresent((project) -> {
-            throw new ProjectAlreadyExistsException();
+            throw new EntityAlreadyExistsException("Project with given name already exists");
         });
 
         var researchProject = new ResearchProject();
