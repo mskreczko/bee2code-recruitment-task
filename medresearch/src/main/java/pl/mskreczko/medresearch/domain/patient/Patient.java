@@ -6,7 +6,9 @@ import lombok.Setter;
 import org.hibernate.Hibernate;
 import org.hibernate.annotations.Cascade;
 import pl.mskreczko.medresearch.domain.consent.Consent;
+import pl.mskreczko.medresearch.domain.labtestorder.LabTestOrder;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
@@ -30,6 +32,10 @@ public class Patient {
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
     @OneToMany(mappedBy = "patient")
     private Set<Consent> consents;
+
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    @OneToMany(mappedBy = "patient")
+    private List<LabTestOrder> labTestsOrders;
 
     @Override
     public boolean equals(Object o) {
