@@ -1,4 +1,15 @@
 # bee2code recruitment task
+
+## Running
+```
+https://github.com/mskreczko/bee2code-recruitment-task.git
+cd bee2code-recruitment-task
+echo "POSTGRES_PASSWORD=<db_password>" > .env
+docker-compose up
+```
+
+## API Endpoints
+
 ========= PACJENCI =========
 
 Lista pacjentów: 
