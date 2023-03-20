@@ -69,3 +69,18 @@ Usunięcie zgody:
 Dodanie zlecenia: 
 
 ```curl -X POST -H "Content-Type: application/json" -d '{"patientId": ":patient", "researchProjectId": ":project", "deadline": "2023-04-15"'} http://localhost:8080/api/v1/lab-orders```
+
+
+========= DODAWANIE PLIKÓW JPG/PDF =========
+
+Dodanie pliku:
+
+```curl --form 'file=@"<file_path>"' http://localhost:8080/api/v1/uploads```
+
+Pobranie pliku:
+
+```curl http://localhost:8080/api/v1/uploads/:filename --output <filename>```
+
+Usunięcie pliku:
+
+```curl -X DELETE http://localhost:8080/api/v1/uploads/:filename```
