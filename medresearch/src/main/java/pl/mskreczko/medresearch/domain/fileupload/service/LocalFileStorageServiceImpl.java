@@ -62,4 +62,13 @@ public class LocalFileStorageServiceImpl implements FileStorageService {
         }
         return Optional.empty();
     }
+
+    @Override
+    public void deleteFile(String filename) {
+        try {
+            Files.delete(ROOT_DIR.resolve(filename));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

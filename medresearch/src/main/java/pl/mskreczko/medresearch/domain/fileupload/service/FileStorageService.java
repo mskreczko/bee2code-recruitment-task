@@ -10,4 +10,6 @@ public interface FileStorageService {
     boolean validateFilename(String filename);
     boolean storeFile(MultipartFile file);
     Optional<Resource> loadFile(String filename);
+
+    void deleteFile(String filename);
 }
