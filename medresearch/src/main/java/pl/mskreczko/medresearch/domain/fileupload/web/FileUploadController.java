@@ -32,4 +32,14 @@ public class FileUploadController {
         return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" +
                 resourceOptional.get().getFilename() + "\"").body(resourceOptional.get());
     }
+
+    @DeleteMapping("{name}")
+    public ResponseEntity<?> deleteFile(@PathVariable("name") String filename) {
+        try {
+            fileStorageService.deleteFile(filename);
+            return ResponseEntity.noContent().build();
+        } catch (RuntimeException e) {
+            return new ResponseEntity<>(HttpStatusCode.valueOf(409));
+        }
+    }
 }
